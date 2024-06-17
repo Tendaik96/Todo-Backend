@@ -7,6 +7,9 @@
 4. npm install prisma --save-dev
 5. npx prisma init --datasource-provider mySql
 6. download MySQL (`https://dev.mysql.com/downloads/windows/installer/5.7.html`)
+7.
+8. npm i @prisma/client
+9. npx prisma generate
 
 
 Next steps:

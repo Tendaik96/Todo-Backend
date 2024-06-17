@@ -1,7 +1,7 @@
 -- CreateTable
 CREATE TABLE `Todo` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
-    `name` VARCHAR(191) NOT NULL,
+    `task` VARCHAR(191) NOT NULL,
     `progress` VARCHAR(191) NOT NULL,
 
     PRIMARY KEY (`id`)
