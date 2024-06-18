@@ -1,29 +1,26 @@
 import express, { Request, Response } from 'express'
 import { PrismaClient } from "@prisma/client";
-import { createTodo } from '../models/todos'
+import { createTodo, newTodoType } from '../models/todos'
 
 const createRouter = express.Router()
 const prisma = new PrismaClient();
-
-    type newTodoType = {
-    task: string,
-    progress: "incomplete" | "in progress" | "complete"
-}
 
 
 //Route handler for get all todos
 createRouter.post("/", async function (req: Request, res: Response) { 
 
     try {
-        const newEntry :newTodoType = req.body
-        const createItem = await createTodo(newEntry)
+        const newEntry: newTodoType = req.body;
 
         if (!newEntry.task || !newEntry.progress) {
             throw new Error("Invalid input");
         }
+
+         const createItem = await createTodo({data: newEntry})
         
         res.status(200).json({ success: true, payload: createItem }); 
-        console.log(req.body)
+        console.log("Request body:", req.body);
+        console.log("Created item:", createItem);
         
     } catch (error : any) {
        console.error(error.message)

@@ -22,24 +22,44 @@ export async function getAllTodo() {
 
 // CREATE TODO
 
-type newTodoType = {
+export type newTodoType =  {
     task: string,
     progress: "incomplete" | "in progress" | "complete"
 }
 
-export async function createTodo( newTodo : newTodoType) {
-    const todo = await prisma.todo.create({ data: newTodo })
+export async function createTodo( { data: newTodo } : { data :newTodoType}) {
+    const todo = await prisma.todo.create({ data: newTodo });
     console.log(todo)
     return todo
 }
 
-/* createTodo({task: "ru 9 k", progress: "incomplete"})
+/* createTodo({data :{task: "ru 9 k", progress: "complete"}})
     .catch(e => {
         console.error(e.message)
     })
     .finally(async () => {
         await prisma.$disconnect()
     }) */
+
+
+
+
+        /* export type TodoCreateInput = {
+  id?: number;
+  task: string,
+    progress: "incomplete" | "in progress" | "complete"
+}
+
+export type TodoUncheckedCreateInput = {
+  id?: number;
+  task: string,
+progress: "incomplete" | "in progress" | "complete"
+}
+
+export type TodoCreateArgs = {
+    //data: XOR<ProfileCreateInput, ProfileUncheckedCreateInput>;
+    data: XOR<TodoCreateInput, TodoUncheckedCreateInput>;
+} */
 
 
 // DELETE ONE TODO

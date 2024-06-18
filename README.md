@@ -25,3 +25,12 @@ Add changes to database:
 - npx prisma migrate dev --name init
 expect to see: Your database is now in sync with your schema.
 
+
+
+Authentication: model User {
+  id Int @id @default(autoincrement())
+  username String
+  password String
+  email String
+}
+

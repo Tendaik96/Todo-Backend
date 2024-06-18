@@ -7,6 +7,8 @@ import deleteAllRouter from './routes/deleteAllTodos'
 const app: Application = express();
 const PORT = process.env.PORT || 3000;
 
+app.use(express.json());
+
 app.use("/api/alltodos", allRouter);
 app.use("/api/createtodo", createRouter);
 app.use("/api/deletetodo", deleteRouter);
