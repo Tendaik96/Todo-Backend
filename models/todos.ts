@@ -33,7 +33,7 @@ export async function createTodo( newTodo : newTodoType) {
     return todo
 }
 
-/* createTodo({task: "run 5 k", progress: "incomplete"})
+/* createTodo({task: "ru 9 k", progress: "incomplete"})
     .catch(e => {
         console.error(e.message)
     })
@@ -69,6 +69,7 @@ export async function deleteAllTodos() {
     const deleteTodos = await prisma.todo.deleteMany({})
     await prisma.$executeRaw`ALTER TABLE todo AUTO_INCREMENT = 1`;
     console.log(deleteTodos)
+    /* return deleteTodos */
 }
 
 /* deleteAllTodos()
