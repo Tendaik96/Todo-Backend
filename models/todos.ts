@@ -5,27 +5,35 @@ const prisma = new PrismaClient();
 
 
 //GET ALL TODOS'
-async function getAllTodo() {
+export async function getAllTodo() {
     const todo = await prisma.todo.findMany()
     console.log(todo)
+    return todo
 }
 
-getAllTodo()
+/* getAllTodo()
     .catch(e => {
         console.error(e.message)
     })
     .finally(async () => {
         await prisma.$disconnect()
-    })
+    }) */
 
 
 // CREATE TODO
-async function createTodo(task: string, progress: "incomplete" | "in progress" | "complete") {
-    const todo = await prisma.todo.create({ data: { task: task, progress: progress } })
-    console.log(todo)
+
+type newTodoType = {
+    task: string,
+    progress: "incomplete" | "in progress" | "complete"
 }
 
-/* createTodo("run 5 k", "complete")
+export async function createTodo( newTodo : newTodoType) {
+    const todo = await prisma.todo.create({ data: newTodo })
+    console.log(todo)
+    return todo
+}
+
+/* createTodo({task: "run 5 k", progress: "incomplete"})
     .catch(e => {
         console.error(e.message)
     })
@@ -35,7 +43,7 @@ async function createTodo(task: string, progress: "incomplete" | "in progress" |
 
 
 // DELETE ONE TODO
-async function deleteTodoById(id: number) {
+export async function deleteTodoById(id: number) {
     const deleteUser = await prisma.todo.delete({
   where: {
     id: id,
@@ -47,17 +55,17 @@ async function deleteTodoById(id: number) {
     console.log(deleteUser)
 }
 
-deleteTodoById(5)
+/* deleteTodoById(5)
     .catch(e => {
         console.error(e.message)
     })
     .finally(async () => {
         await prisma.$disconnect()
-    })
+    }) */
 
 
 //DELETE ALL TODOS
-async function deleteAllTodos() {
+export async function deleteAllTodos() {
     const deleteTodos = await prisma.todo.deleteMany({})
     await prisma.$executeRaw`ALTER TABLE todo AUTO_INCREMENT = 1`;
     console.log(deleteTodos)
@@ -72,7 +80,7 @@ async function deleteAllTodos() {
     }) */
 
 
-       /*  async function deleteTodoByTask(task: string) {
+       /*  export async function deleteTodoByTask(task: string) {
     const deleteUser = await prisma.todo.delete({
   where: {
     task: task,
@@ -92,7 +100,7 @@ async function deleteAllTodos() {
         
 
 // delete multiple with same heading
-/* async function deleteManyTodo() {
+/* export async function deleteManyTodo() {
     const deleteUser = await prisma.todo.deleteMany({
   where: {
     task: 'write a blog',
