@@ -1,5 +1,6 @@
 import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
+import { z } from "zod";
 
 // its always a good idea to disconnect from the database as soon as you program finishes running
 
@@ -22,10 +23,19 @@ export async function getAllTodo() {
 
 // CREATE TODO
 
-export type newTodoType =  {
+//ZOD: Creating an object schema from https://zod.dev/?id=basic-usage
+export const newTodoType = z.object({
+  task: z.string(),
+progress: z.enum(["incomplete", "in progress", "complete"])
+}).strict();
+
+
+export type newTodoType =  z.infer<typeof newTodoType>;
+
+/* export type newTodoType =  {
     task: string,
     progress: "incomplete" | "in progress" | "complete"
-}
+} */
 
 export async function createTodo( { data: newTodo } : { data :newTodoType}) {
     const todo = await prisma.todo.create({ data: newTodo });
@@ -40,26 +50,6 @@ export async function createTodo( { data: newTodo } : { data :newTodoType}) {
     .finally(async () => {
         await prisma.$disconnect()
     }) */
-
-
-
-
-        /* export type TodoCreateInput = {
-  id?: number;
-  task: string,
-    progress: "incomplete" | "in progress" | "complete"
-}
-
-export type TodoUncheckedCreateInput = {
-  id?: number;
-  task: string,
-progress: "incomplete" | "in progress" | "complete"
-}
-
-export type TodoCreateArgs = {
-    //data: XOR<ProfileCreateInput, ProfileUncheckedCreateInput>;
-    data: XOR<TodoCreateInput, TodoUncheckedCreateInput>;
-} */
 
 
 // DELETE ONE TODO

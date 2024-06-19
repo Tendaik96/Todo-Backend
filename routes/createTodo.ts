@@ -10,7 +10,7 @@ const prisma = new PrismaClient();
 createRouter.post("/", async function (req: Request, res: Response) { 
 
     try {
-        const newEntry: newTodoType = req.body;
+        const newEntry = newTodoType.parse(req.body);
 
         if (!newEntry.task || !newEntry.progress) {
             throw new Error("Invalid input");
@@ -35,3 +35,5 @@ createRouter.post("/", async function (req: Request, res: Response) {
 })
 
 export default createRouter
+
+//Zod usage: https://zod.dev/?id=basic-usage

@@ -25,7 +25,9 @@ Add changes to database:
 - npx prisma migrate dev --name init
 expect to see: Your database is now in sync with your schema.
 
+Zod Requirements: You must enable strict mode in your tsconfig.json. This is a best practice for all TypeScript projects.
 
+1. npm install zod
 
 Authentication: model User {
   id Int @id @default(autoincrement())
