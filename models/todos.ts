@@ -20,6 +20,21 @@ export async function getAllTodo() {
         await prisma.$disconnect()
     }) */
 
+//GET TODOS by ID'
+export async function getTodoById(id: number) {
+const todo = await prisma.todo.findUnique({
+  where: {
+    id: id,
+  },
+})
+    console.log(todo)
+    return todo
+}
+//getTodoById(7)
+
+
+
+
 
 // CREATE TODO
 

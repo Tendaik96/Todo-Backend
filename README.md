@@ -36,3 +36,5 @@ Authentication: model User {
   email String
 }
 
+- install cors
+

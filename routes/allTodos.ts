@@ -6,6 +6,7 @@ import { z } from "zod";
 const allRouter = express.Router()
 const prisma = new PrismaClient();
 
+//typescript static typing
 /* type allTodosType = {
     id: number;
     task: string;
