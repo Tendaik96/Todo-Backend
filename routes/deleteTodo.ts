@@ -5,8 +5,6 @@ import { deleteTodoById } from '../models/todos'
 const deleteRouter = express.Router()
 const prisma = new PrismaClient();
 
-
-
 //Route handler for delete todo
 deleteRouter.delete("/:id", async function (req: Request, res: Response) { 
 

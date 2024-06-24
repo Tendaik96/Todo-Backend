@@ -1,6 +1,6 @@
 import express, { Request, Response } from "express";
 import { PrismaClient } from "@prisma/client";
-import { getTodoById } from "../models/todos";
+import { editTodoById, getTodoById, editTodoType } from "../models/todos";
 import { z } from "zod";
 
 const getTodoRouter = express.Router();
@@ -30,6 +30,23 @@ getTodoRouter.get("/:id", async function (req: Request, res: Response) {
     const parseTodos = todoType.parse(todo);
 
     res.status(200).json({ success: true, payload: parseTodos });
+    console.log(todo);
+  } catch (error: any) {
+    console.error(error.message);
+    res.status(400).json({ error: error.message });
+  } finally {
+    await prisma.$disconnect();
+  }
+});
+
+getTodoRouter.post("/:id", async function (req: Request, res: Response) {
+  try {
+    const id: number = Number(req.params.id)
+    const editTodo = editTodoType.parse(req.body)
+
+    const todo = await editTodoById(id, editTodo);
+
+    res.status(200).json({ success: true, payload: todo });
     console.log(todo);
   } catch (error: any) {
     console.error(error.message);

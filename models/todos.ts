@@ -12,8 +12,8 @@ export async function getAllTodo() {
     return todo
 }
 
-/* getAllTodo()
-    .catch(e => {
+ getAllTodo()
+   /* .catch(e => {
         console.error(e.message)
     })
     .finally(async () => {
@@ -32,21 +32,41 @@ const todo = await prisma.todo.findUnique({
 }
 //getTodoById(7)
 
+//EDIT TODO
+export const editTodoType = z.object({
+  task: z.string(),
+progress: z.enum(["incomplete", "in progress", "complete"])
+}).strict();
 
+export type editTodoType =  z.infer<typeof editTodoType>;
 
+export async function editTodoById(id: number, obj : editTodoType ) {
+const updatedTodo = await prisma.todo.update({
+    where: {
+      id: id,
+    },
+    data: {
+      task: obj.task,
+      progress: obj.progress,
+    },
+  });
+
+  console.log(updatedTodo);
+  return updatedTodo;
+}
+//editTodoById(1, {task: "hello", progress: "complete"})
 
 
 // CREATE TODO
-
 //ZOD: Creating an object schema from https://zod.dev/?id=basic-usage
 export const newTodoType = z.object({
   task: z.string(),
 progress: z.enum(["incomplete", "in progress", "complete"])
 }).strict();
 
-
 export type newTodoType =  z.infer<typeof newTodoType>;
 
+// without ZOD
 /* export type newTodoType =  {
     task: string,
     progress: "incomplete" | "in progress" | "complete"
@@ -74,9 +94,6 @@ export async function deleteTodoById(id: number) {
     id: id,
   },
     })
-
-    // Reset the AUTO_INCREMENT value to 1
-//   await prisma.$executeRaw`ALTER TABLE todo AUTO_INCREMENT = 1`;
     console.log(deleteUser)
 }
 
@@ -104,44 +121,6 @@ export async function deleteAllTodos() {
     .finally(async () => {
         await prisma.$disconnect()
     }) */
-
-
-       /*  export async function deleteTodoByTask(task: string) {
-    const deleteUser = await prisma.todo.delete({
-  where: {
-    task: task,
-  },
-})
-    console.log(deleteUser)
-} */
-
-/* deleteTodoByTask(25)
-    .catch(e => {
-        console.error(e.message)
-    })
-    .finally(async () => {
-        await prisma.$disconnect()
-    }) */
-
-        
-
-// delete multiple with same heading
-/* export async function deleteManyTodo() {
-    const deleteUser = await prisma.todo.deleteMany({
-  where: {
-    task: 'write a blog',
-  },
-})
-    console.log(deleteUser)
-}
-
-deleteManyTodo()
-    .catch(e => {
-        console.error(e.message)
-    })
-    .finally(async () => {
-        await prisma.$disconnect()
-    })  */
 
 
 

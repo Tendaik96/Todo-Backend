@@ -6,7 +6,7 @@ const createRouter = express.Router()
 const prisma = new PrismaClient();
 
 
-//Route handler for get all todos
+//Route handler for create a new todo
 createRouter.post("/", async function (req: Request, res: Response) { 
 
     try {
@@ -35,5 +35,3 @@ createRouter.post("/", async function (req: Request, res: Response) {
 })
 
 export default createRouter
-
-//Zod usage: https://zod.dev/?id=basic-usage

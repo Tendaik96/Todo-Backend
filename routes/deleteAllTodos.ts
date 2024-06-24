@@ -2,13 +2,11 @@ import express, { Request, Response } from 'express'
 import { PrismaClient } from "@prisma/client";
 import { deleteAllTodos } from '../models/todos'
 
-const deleteRouter = express.Router()
+const deleteAllRouter = express.Router()
 const prisma = new PrismaClient();
 
-
-
 //Route handler for delete todo
-deleteRouter.delete("/", async function (req: Request, res: Response) { 
+deleteAllRouter.delete("/", async function (req: Request, res: Response) { 
 
     try {
         const deleteTodos  = await deleteAllTodos()
@@ -28,4 +26,4 @@ deleteRouter.delete("/", async function (req: Request, res: Response) {
     
 })
 
-export default deleteRouter
+export default deleteAllRouter
