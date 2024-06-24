@@ -39,10 +39,13 @@ getTodoRouter.get("/:id", async function (req: Request, res: Response) {
   }
 });
 
-getTodoRouter.post("/:id", async function (req: Request, res: Response) {
+getTodoRouter.patch("/:id", async function (req: Request, res: Response) {
   try {
     const id: number = Number(req.params.id)
     const editTodo = editTodoType.parse(req.body)
+
+    console.log("Editing Todo ID:", id);
+    console.log("New Values:", editTodo);
 
     const todo = await editTodoById(id, editTodo);
 
