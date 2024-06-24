@@ -115,7 +115,7 @@ Connect to the Frontend:
 2. Use the `fetch` method to retrieve data from the backend. Ensure the fetch request defines its headers to avoid errors.
 
 ## Running Instructions
-1. To start the app, enter this command into the terminal: `npm run dev`. This runs the frontend of the project.
+1. To start the app, enter this command into the terminal: `npm i` and then `npm run dev`. This runs the frontend of the project.
 2. Go to the backend repository and enter this command into the terminal: `npm run dev`. This will run the backend.
 3. Ensure that both the frontend and backend do not run on the same port.
 4. You can now start using the app.
